@@ -196,5 +196,6 @@ npx serve .
 
 ---
 
-**WatchMe Marketing Website v1.0**  
-🎯 高品質・高パフォーマンスなマーケティングサイト
+**WatchMe Marketing Website v1.1**  
+🎯 高品質・高パフォーマンスなマーケティングサイト  
+🔑 SSH接続設定完了
