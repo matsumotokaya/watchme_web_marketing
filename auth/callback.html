@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メール確認完了 - WatchMe</title>
+    
+    <!-- Favicon Links -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="../images/favicon-128x128.png">
+    <link rel="shortcut icon" href="../images/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../images/favicon-128x128.png">
+    
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .confirmation-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .confirmation-card {
+            background: white;
+            border-radius: 16px;
+            padding: 48px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 36px;
+            color: white;
+        }
+        
+        .confirmation-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 16px;
+        }
+        
+        .confirmation-message {
+            font-size: 18px;
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+        
+        .next-steps {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            text-align: left;
+        }
+        
+        .next-steps h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .step-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .step-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #6c757d;
+        }
+        
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #667eea;
+            padding: 12px 24px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .confirmation-card {
+                padding: 32px 24px;
+            }
+            
+            .confirmation-title {
+                font-size: 24px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-container">
+        <div class="confirmation-card">
+            <div class="success-icon">
+                ✓
+            </div>
+            
+            <h1 class="confirmation-title">メール確認完了！</h1>
+            
+            <p class="confirmation-message">
+                アカウントの認証が正常に完了しました。<br>
+                WatchMeの全機能をご利用いただけます。
+            </p>
+            
+            <div class="next-steps">
+                <h3>次のステップ</h3>
+                <ul class="step-list">
+                    <li>
+                        <span class="step-number">1</span>
+                        iOSアプリでログイン
+                    </li>
+                    <li>
+                        <span class="step-number">2</span>
+                        音声録音を開始
+                    </li>
+                    <li>
+                        <span class="step-number">3</span>
+                        AI分析結果を確認
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="https://hey-watch.me" class="btn-primary">
+                    ホームに戻る
+                </a>
+                <a href="https://hey-watch.me/login.html" class="btn-secondary">
+                    ログイン
+                </a>
+            </div>
+            
+            <p style="margin-top: 24px; font-size: 14px; color: #6c757d;">
+                このページは自動的に閉じても構いません。<br>
+                iOSアプリからログインしてお使いください。
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // URLパラメータから確認状態をチェック
+        const urlParams = new URLSearchParams(window.location.search);
+        const fragment = window.location.hash;
+        
+        // 確認が成功したかログに記録
+        console.log('✅ Supabase認証確認ページ表示');
+        console.log('URL Parameters:', urlParams.toString());
+        console.log('Fragment:', fragment);
+        
+        // 自動リダイレクト（オプション）
+        // 10秒後にホームページにリダイレクト
+        // setTimeout(() => {
+        //     window.location.href = 'https://hey-watch.me';
+        // }, 10000);
+    </script>
+</body>
+</html>
