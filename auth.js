@@ -123,6 +123,8 @@ async function handleSignup(event) {
 
         if (error) {
             console.error('認証エラー詳細:', error);
+            console.error('エラーメッセージ:', error.message);
+            console.error('エラーコード:', error.code);
             throw error;
         }
 
@@ -400,7 +402,7 @@ function closeForgotPassword() {
 }
 
 function redirectToLogin() {
-    window.location.href = 'login.html';
+    window.location.href = 'https://dashboard.hey-watch.me/login';
 }
 
 function showAlert(message, type = 'info') {
@@ -412,10 +414,11 @@ function showAlert(message, type = 'info') {
         alertText.textContent = message;
         alert.classList.remove('hidden');
         
-        // 5秒後に自動で閉じる
+        // エラーメッセージは8秒、成功メッセージは5秒で自動で閉じる
+        const autoCloseTime = type === 'error' ? 8000 : 5000;
         setTimeout(() => {
             alert.classList.add('hidden');
-        }, 5000);
+        }, autoCloseTime);
     }
 }
 
@@ -440,12 +443,25 @@ function getErrorMessage(error) {
     // Supabaseエラーメッセージの日本語化
     const errorMessages = {
         'Invalid login credentials': 'メールアドレスまたはパスワードが正しくありません',
-        'User already registered': 'このメールアドレスは既に登録されています',
+        'User already registered': 'このメールアドレスは既に登録されています。ログインページからサインインしてください。',
         'Password should be at least 6 characters': 'パスワードは6文字以上で入力してください',
-        'Email not confirmed': 'メールアドレスの確認が完了していません',
+        'Email not confirmed': 'メールアドレスの確認が完了していません。確認メールをチェックしてください。',
         'Invalid email': 'メールアドレスの形式が正しくありません',
-        'Too many requests': 'リクエストが多すぎます。しばらく時間をおいてから再度お試しください'
+        'Too many requests': 'リクエストが多すぎます。しばらく時間をおいてから再度お試しください',
+        'Email already exists': 'このメールアドレスは既に登録されています。ログインページからサインインしてください。',
+        'Signup disabled': '新規登録が無効になっています。管理者にお問い合わせください。',
+        'Email rate limit exceeded': 'メール送信回数の上限に達しました。しばらく時間をおいてから再度お試しください。'
     };
 
-    return errorMessages[error.message] || error.message || 'エラーが発生しました';
+    // エラーオブジェクトからメッセージを取得
+    let errorMessage = '';
+    if (error.message) {
+        errorMessage = error.message;
+    } else if (typeof error === 'string') {
+        errorMessage = error;
+    } else {
+        errorMessage = 'エラーが発生しました';
+    }
+
+    return errorMessages[errorMessage] || errorMessage;
 }
