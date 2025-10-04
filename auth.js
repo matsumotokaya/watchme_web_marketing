@@ -112,6 +112,7 @@ async function handleSignup(event) {
             email: email,
             password: password,
             options: {
+                emailRedirectTo: 'https://hey-watch.me/auth/callback',
                 data: {
                     display_name: displayName,
                     newsletter_subscription: !!newsletter

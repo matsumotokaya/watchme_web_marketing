@@ -66,7 +66,7 @@
                 <div class="auth-form-container">
                     <div class="auth-form-header">
                         <h2>新規会員登録</h2>
-                        <p>基本機能は無料でご利用いただけます</p>
+                        <p>アカウント作成後、認証メールをお送りします</p>
                     </div>
 
                     <form id="signup-form" class="auth-form">
@@ -135,10 +135,10 @@
 
                         <div class="form-group checkbox-group">
                             <label class="checkbox-label">
-                                <input type="checkbox" id="newsletter" name="newsletter">
+                                <input type="checkbox" id="newsletter" name="newsletter" checked>
                                 <span class="checkbox-custom"></span>
                                 <span class="checkbox-text">
-                                    新機能やアップデート情報を受け取る（任意）
+                                    新機能やアップデート情報を受け取る（任意、デフォルトON）
                                 </span>
                             </label>
                         </div>
@@ -183,11 +183,19 @@
                 <h3>🎉 登録完了！</h3>
             </div>
             <div class="modal-body">
-                <p>アカウントの作成が完了しました。</p>
-                <p>確認メールを送信しましたので、メールをご確認ください。</p>
+                <p><strong>アカウントの作成が完了しました</strong></p>
+                <p>WatchMeアプリからログインしてご利用ください。</p>
+                <div style="margin: 20px 0; padding: 15px; background: #f0f9ff; border: 1px solid #0ea5e9; border-radius: 8px; text-align: left;">
+                    <p style="margin: 0 0 8px 0; font-weight: 600; color: #0369a1;">📱 次のステップ</p>
+                    <ol style="margin: 0; padding-left: 20px; font-size: 14px; color: #0c4a6e;">
+                        <li>WatchMeアプリをダウンロード</li>
+                        <li>登録したメールアドレスとパスワードでログイン</li>
+                        <li>音声録音を開始してAI分析を体験</li>
+                    </ol>
+                </div>
             </div>
             <div class="modal-footer">
-                <button class="btn-primary" onclick="redirectToLogin()">ログインページへ</button>
+                <button class="btn-primary" onclick="window.location.href='https://hey-watch.me'">ホームに戻る</button>
             </div>
         </div>
     </div>
