@@ -366,12 +366,14 @@ class ParallaxController {
 
             const personBlue = document.querySelector('.hero-person-blue-image');
             if (personBlue) {
-                personBlue.style.transform = `translateX(${personSlowX}px) translateY(50%)`;
+                // 重要: CSSの初期値と同期 (styles.css line 780) translateY(53%)
+                personBlue.style.transform = `translateX(${personSlowX}px) translateY(53%)`;
             }
 
             const personGreen = document.querySelector('.hero-person-green-image');
             if (personGreen) {
-                personGreen.style.transform = `translateX(${personSlowX}px) translateY(20%)`;
+                // 重要: CSSの初期値と同期 (styles.css line 802) translateY(29%)
+                personGreen.style.transform = `translateX(${personSlowX}px) translateY(29%)`;
             }
 
             // デバイス画像のパララックス効果: 下から上に移動
@@ -544,6 +546,15 @@ class MobileMenuController {
 
     openMobileMenu() {
         const navMenu = document.querySelector('.nav-menu');
+        const navLogo = document.querySelector('.nav-logo');
+        const navContainer = document.querySelector('.nav-container');
+
+        // 元の親要素を記憶
+        navMenu.dataset.originalParent = 'nav-container';
+
+        // body直下に移動
+        document.body.appendChild(navMenu);
+
         navMenu.classList.add('mobile-menu-open');
 
         // メニューコンテナのスタイル
@@ -556,28 +567,36 @@ class MobileMenuController {
         navMenu.style.bottom = '0';
         navMenu.style.width = '100vw';
         navMenu.style.height = '100vh';
-        navMenu.style.background = 'rgba(0, 0, 0, 0.95)';
+        navMenu.style.background = 'white';
         navMenu.style.zIndex = '9999';
-        navMenu.style.justifyContent = 'center';
-        navMenu.style.alignItems = 'flex-start';
-        navMenu.style.gap = '2rem';
-        navMenu.style.padding = '6rem 3rem 3rem 3rem';
+        navMenu.style.justifyContent = 'flex-start';
+        navMenu.style.alignItems = 'stretch';
+        navMenu.style.gap = '0';
+        navMenu.style.padding = '0';
         navMenu.style.opacity = '0';
         navMenu.style.transition = 'opacity 0.3s ease';
+
+        // ロゴをクローンして上部に表示
+        const logoClone = navLogo.cloneNode(true);
+        logoClone.style.cssText = `
+            padding: 2rem 2rem 1.5rem 2rem;
+            border-bottom: 1px solid #e5e7eb;
+        `;
+        navMenu.insertBefore(logoClone, navMenu.firstChild);
 
         // 閉じるボタンを作成
         const closeButton = document.createElement('button');
         closeButton.className = 'mobile-menu-close';
         closeButton.innerHTML = `
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                <line x1="8" y1="8" x2="24" y2="24" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                <line x1="24" y1="8" x2="8" y2="24" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <line x1="6" y1="6" x2="18" y2="18" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+                <line x1="18" y1="6" x2="6" y2="18" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
             </svg>
         `;
         closeButton.style.cssText = `
             position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
+            top: 2rem;
+            right: 2rem;
             background: none;
             border: none;
             cursor: pointer;
@@ -590,40 +609,51 @@ class MobileMenuController {
         });
         navMenu.appendChild(closeButton);
 
-        // 背景クリックで閉じる
-        navMenu.addEventListener('click', (e) => {
-            if (e.target === navMenu) {
-                this.closeMobileMenu();
-            }
-        });
+        // メニューコンテンツのラッパー
+        const menuWrapper = document.createElement('div');
+        menuWrapper.className = 'mobile-menu-wrapper';
+        menuWrapper.style.cssText = `
+            flex: 1;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        `;
 
         // リンクのスタイル
         const links = navMenu.querySelectorAll('.nav-link');
         links.forEach(link => {
-            link.style.color = 'white';
-            link.style.fontSize = '1.125rem';
-            link.style.fontWeight = '600';
+            link.style.color = '#1a1a1a';
+            link.style.fontSize = '1rem';
+            link.style.fontWeight = '500';
             link.style.textAlign = 'left';
             link.style.width = '100%';
-            link.style.padding = '0.5rem 0';
-            link.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
+            link.style.padding = '1rem 0';
+            link.style.borderBottom = '1px solid #e5e7eb';
+            link.style.background = 'none';
+            link.style.borderRadius = '0';
 
-            // CTAボタンのスタイル調整
+            // CTAボタンのスタイルをリセット
             if (link.classList.contains('cta-button')) {
-                link.style.background = 'white';
+                link.style.background = 'none';
                 link.style.color = '#1a1a1a';
-                link.style.borderRadius = '2rem';
-                link.style.padding = '0.75rem 2rem';
+                link.style.borderRadius = '0';
+                link.style.padding = '1rem 0';
                 link.style.border = 'none';
-                link.style.marginTop = '1rem';
-                link.style.width = 'auto';
+                link.style.borderBottom = '1px solid #e5e7eb';
+                link.style.marginTop = '0';
+                link.style.width = '100%';
             }
 
             // クリックしたら閉じる
             link.addEventListener('click', () => {
                 this.closeMobileMenu();
             });
+
+            menuWrapper.appendChild(link);
         });
+
+        navMenu.appendChild(menuWrapper);
 
         // フェードイン
         requestAnimationFrame(() => {
@@ -633,6 +663,7 @@ class MobileMenuController {
 
     closeMobileMenu() {
         const navMenu = document.querySelector('.nav-menu');
+        const navContainer = document.querySelector('.nav-container');
 
         // フェードアウト
         navMenu.style.opacity = '0';
@@ -647,11 +678,34 @@ class MobileMenuController {
                 closeButton.remove();
             }
 
+            // クローンされたロゴを削除
+            const logoClone = navMenu.querySelector('.nav-logo');
+            if (logoClone) {
+                logoClone.remove();
+            }
+
+            // メニューラッパーを削除
+            const menuWrapper = navMenu.querySelector('.mobile-menu-wrapper');
+            if (menuWrapper) {
+                // リンクを元の位置に戻す
+                const links = menuWrapper.querySelectorAll('.nav-link');
+                links.forEach(link => {
+                    navMenu.appendChild(link);
+                });
+                menuWrapper.remove();
+            }
+
             // リンクのスタイルをリセット
             const links = navMenu.querySelectorAll('.nav-link');
             links.forEach(link => {
                 link.style.cssText = '';
             });
+
+            // 元の親要素に戻す
+            if (navMenu.dataset.originalParent === 'nav-container' && navContainer) {
+                navContainer.appendChild(navMenu);
+                delete navMenu.dataset.originalParent;
+            }
         }, 300);
     }
 }
