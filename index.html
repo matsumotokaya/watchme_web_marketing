@@ -39,40 +39,58 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    あなたの心を
-                    <span class="gradient-text">見守る</span>
-                    AIパートナー
-                </h1>
-                <p class="hero-description">
-                    音声データから心理状態をリアルタイム分析。<br>
-                    AIが読み取る感情の変化で、より良い明日への一歩を。
-                </p>
-                <div class="hero-buttons">
-                    <a href="signup.html" class="btn-primary">無料で始める</a>
-                    <button class="btn-secondary" onclick="scrollToSection('technology')">デモを見る</button>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="dashboard-preview">
-                    <img src="./images/dashboard-hero.png" alt="WatchMe Dashboard Preview" class="dashboard-image">
-                    <div class="floating-card emotion-card">
-                        <div class="card-header">感情スコア</div>
-                        <div class="score-value">+73</div>
-                        <div class="score-trend">↗ +12%</div>
-                    </div>
-                    <div class="floating-card analytics-card">
-                        <div class="card-header">音声分析</div>
-                        <div class="analytics-bars">
-                            <div class="bar joy" style="height: 60%"></div>
-                            <div class="bar calm" style="height: 80%"></div>
-                            <div class="bar energy" style="height: 45%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Background Color Layers -->
+        <div class="hero-bg-layers">
+            <div class="hero-bg-layer hero-bg-pink"></div>
+            <div class="hero-bg-layer hero-bg-blue"></div>
+            <div class="hero-bg-layer hero-bg-green"></div>
+            <div class="hero-bg-layer hero-bg-yellow"></div>
+        </div>
+
+        <!-- Person Image Layers - Pink (Independent) -->
+        <div class="hero-person-pink-layer">
+            <img src="./images/hero_people_001.png" alt="Hero Person 1" class="hero-person-pink-image">
+        </div>
+
+        <!-- Person Image Layers - Blue (Independent) -->
+        <div class="hero-person-blue-layer">
+            <img src="./images/hero_people_002.png" alt="Hero Person 2" class="hero-person-blue-image">
+        </div>
+
+        <!-- Person Image Layers - Green (Independent) -->
+        <div class="hero-person-green-layer">
+            <img src="./images/hero_people_003.png" alt="Hero Person 3" class="hero-person-green-image">
+        </div>
+
+        <!-- Logo Typography Layers (Independent) -->
+        <!-- Top: Wire Logo -->
+        <div class="hero-logo hero-logo-top">
+            <img src="./images/symbol_wire_001.svg" alt="WatchMe Logo">
+        </div>
+
+        <!-- Middle: Solid Logo -->
+        <div class="hero-logo hero-logo-middle">
+            <img src="./images/symbol_001.svg" alt="WatchMe Logo">
+        </div>
+
+        <!-- Bottom: Wire Logo -->
+        <div class="hero-logo hero-logo-bottom">
+            <img src="./images/symbol_wire_001.svg" alt="WatchMe Logo">
+        </div>
+
+
+        <!-- Device Image Layer -->
+        <div class="hero-device-layer">
+            <img src="./images/hero_device_001.png" alt="Device" class="hero-device-image">
+
+            <!-- Floating Icons around Device -->
+            <img src="./images/heart_purple_front_001.png" alt="Icon" class="hero-device-icon hero-device-icon-1">
+            <img src="./images/heart_purple_front_001.png" alt="Icon" class="hero-device-icon hero-device-icon-2">
+            <img src="./images/heart_purple_front_001.png" alt="Icon" class="hero-device-icon hero-device-icon-3">
+        </div>
+
+        <!-- Text Content Layer (Empty for now) -->
+        <div class="hero-content-layer">
         </div>
     </section>
 

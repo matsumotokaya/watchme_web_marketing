@@ -53,28 +53,23 @@ class NavigationController {
     }
 
     init() {
+        // 初期状態で非表示
+        this.navbar.style.transform = 'translateY(-100%)';
         window.addEventListener('scroll', utils.throttle(this.handleScroll.bind(this), 100));
     }
 
     handleScroll() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        // Add/remove scrolled class for styling
-        if (scrollTop > 50) {
+
+        // スクロールが200px以上で表示
+        if (scrollTop > 200) {
             this.navbar.classList.add('scrolled');
+            this.navbar.style.transform = 'translateY(0)';
         } else {
             this.navbar.classList.remove('scrolled');
+            this.navbar.style.transform = 'translateY(-100%)';
         }
 
-        // Hide/show navbar on scroll direction
-        if (scrollTop > this.lastScrollTop && scrollTop > 100) {
-            // Scrolling down
-            this.navbar.style.transform = 'translateY(-100%)';
-        } else {
-            // Scrolling up
-            this.navbar.style.transform = 'translateY(0)';
-        }
-        
         this.lastScrollTop = scrollTop;
     }
 }
