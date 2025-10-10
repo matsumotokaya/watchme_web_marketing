@@ -604,16 +604,22 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-light);
+    /* デフォルト：透明背景（ヒーローセクション） */
+    background: transparent;
     z-index: 1000;
-    transition: transform 0.3s ease-in-out, background 0.3s ease;
+    transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
+}
+
+/* スクロール時：すりガラス背景 */
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
 
 .nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    /* max-widthを削除して画面幅いっぱいに */
+    width: 100%;
     padding: 0 var(--spacing-6);
     display: flex;
     justify-content: space-between;
@@ -841,41 +847,48 @@ body {
     align-items: flex-start;
     justify-content: center;
     padding-top: 5%;
+    /* アイコンの基準点としても機能 */
 }
 
 .hero-device-image {
-    height: 160%;
+    height: 192%; /* 160% × 1.2 = 192% (120%拡大) */
     width: auto;
     object-fit: contain;
     object-position: center top;
-    transform: translateY(-30%);
+    /* 重要: JavaScriptのパララックス効果と同期 (script.js line 376) */
+    transform: translateY(-25%); /* PC版の初期位置 */
 }
 
 /* Floating Icons around Device */
 .hero-device-icon {
     position: absolute;
-    width: 80px;
-    height: 80px;
     object-fit: contain;
     z-index: 35;
+    /* 親要素(.hero-device-layer)を基準とした相対位置 */
 }
 
 /* Left side - upper */
 .hero-device-icon-1 {
-    left: 15%;
-    top: 25%;
+    left: 10%; /* デバイスレイヤー内での位置 */
+    top: 30%;
+    width: 160px;
+    height: 160px;
 }
 
 /* Right side - upper */
 .hero-device-icon-2 {
-    right: 15%;
-    top: 15%;
+    right: 10%; /* デバイスレイヤー内での位置 */
+    top: 20%;
+    width: 80px;
+    height: 80px;
 }
 
 /* Right side - lower */
 .hero-device-icon-3 {
-    right: 10%;
-    bottom: 30%;
+    right: 5%; /* デバイスレイヤー内での位置 */
+    bottom: 10%; /* デバイスレイヤー内での位置 */
+    width: 240px;
+    height: 240px;
 }
 
 /* Text Content Layer */
@@ -1953,6 +1966,51 @@ body {
         width: 100%;
     }
 
+    /* Mobile: デバイスレイヤーを中央に配置 */
+    .hero-device-layer {
+        right: 50%;
+        transform: translateX(50%);
+        width: 80%; /* 中央に寄せて幅を広げる */
+    }
+
+    /* Mobile: デバイス画像サイズ調整 */
+    .hero-device-image {
+        height: 125%;
+        /* 重要: JavaScriptのパララックス効果と同期 (script.js line 376) */
+        transform: translateY(-12.5%); /* モバイル版の初期位置 */
+    }
+
+    /* Mobile: 人物画像サイズ調整 */
+    .hero-person-blue-image {
+        height: 150%;
+    }
+
+    .hero-person-green-image {
+        height: 85%;
+    }
+
+    /* Mobile: アイコンをデバイスの周りに配置 */
+    .hero-device-icon-1 {
+        left: 5%;
+        top: 20%;
+        width: 80px; /* 160px → 80px */
+        height: 80px;
+    }
+
+    .hero-device-icon-2 {
+        right: 5%;
+        top: 10%;
+        width: 50px; /* 80px → 50px */
+        height: 50px;
+    }
+
+    .hero-device-icon-3 {
+        right: 0%;
+        bottom: 15%;
+        width: 120px; /* 240px → 120px */
+        height: 120px;
+    }
+
     .hero-container {
         grid-template-columns: 1fr;
         gap: var(--spacing-12);
@@ -1989,6 +2047,12 @@ body {
     
     .nav-menu {
         display: none;
+    }
+
+    /* Mobile: ロゴサイズ調整 */
+    .nav-logo .logo-image {
+        height: 55px;
+        top: 5px;
     }
     
     .pricing-grid {

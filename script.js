@@ -53,21 +53,34 @@ class NavigationController {
     }
 
     init() {
-        // 初期状態で非表示
-        this.navbar.style.transform = 'translateY(-100%)';
+        // 初期状態で透明背景（常に表示）
+        this.navbar.style.transform = 'translateY(0)';
+        this.navbar.style.transition = 'transform 0.3s ease-in-out, background 0.3s ease-in-out';
+
+        // スクロールイベント（throttle使用）
         window.addEventListener('scroll', utils.throttle(this.handleScroll.bind(this), 100));
+
+        // 初回実行（ページ読み込み時のスクロール位置を確認）
+        this.handleScroll();
     }
 
     handleScroll() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        // モバイル対応：複数の方法でスクロール位置を取得
+        const scrollTop = window.pageYOffset ||
+                         document.documentElement.scrollTop ||
+                         document.body.scrollTop ||
+                         0;
 
-        // スクロールが200px以上で表示
-        if (scrollTop > 200) {
-            this.navbar.classList.add('scrolled');
-            this.navbar.style.transform = 'translateY(0)';
+        // 100px以上スクロールしたらすりガラス背景を表示
+        // 100px未満で透明背景に戻る
+        if (scrollTop > 100) {
+            if (!this.navbar.classList.contains('scrolled')) {
+                this.navbar.classList.add('scrolled');
+            }
         } else {
-            this.navbar.classList.remove('scrolled');
-            this.navbar.style.transform = 'translateY(-100%)';
+            if (this.navbar.classList.contains('scrolled')) {
+                this.navbar.classList.remove('scrolled');
+            }
         }
 
         this.lastScrollTop = scrollTop;
@@ -299,26 +312,100 @@ class ButtonController {
 class ParallaxController {
     constructor() {
         this.heroSection = document.querySelector('.hero');
-        this.parallaxElements = document.querySelectorAll('.floating-card');
+        this.logoTop = document.querySelector('.hero-logo-top');
+        this.logoMiddle = document.querySelector('.hero-logo-middle');
+        this.logoBottom = document.querySelector('.hero-logo-bottom');
         this.init();
     }
 
     init() {
-        if (window.innerWidth > 768) { // Only enable on desktop
-            window.addEventListener('scroll', utils.throttle(this.handleScroll.bind(this), 16));
-        }
+        // デスクトップ・モバイル両方で初期化、handleScroll内で判定
+        window.addEventListener('scroll', utils.throttle(this.handleScroll.bind(this), 16));
     }
 
     handleScroll() {
         const scrolled = window.pageYOffset;
         const heroBottom = this.heroSection.offsetTop + this.heroSection.offsetHeight;
-        
+
         if (scrolled <= heroBottom) {
-            this.parallaxElements.forEach((element, index) => {
-                const speed = (index + 1) * 0.1;
-                const yPos = -(scrolled * speed);
-                element.style.transform = `translateY(${yPos}px)`;
-            });
+            // ロゴのパララックス効果（速度: 0.5）
+            // 上のロゴ: 左に移動
+            if (this.logoTop) {
+                const topSpeed = 0.5;
+                const topX = -(scrolled * topSpeed);
+                this.logoTop.style.transform = `translateX(calc(-50% + ${topX}px))`;
+            }
+
+            // 真ん中のロゴ: 右に移動
+            if (this.logoMiddle) {
+                const middleSpeed = 0.5;
+                const middleX = (scrolled * middleSpeed);
+                this.logoMiddle.style.transform = `translateX(calc(-50% + ${middleX}px))`;
+            }
+
+            // 下のロゴ: 左に移動
+            if (this.logoBottom) {
+                const bottomSpeed = 0.5;
+                const bottomX = -(scrolled * bottomSpeed);
+                this.logoBottom.style.transform = `translateX(calc(-50% + ${bottomX}px))`;
+            }
+
+            // 人物画像のパララックス効果
+            // ピンクの人物: 左から右（速度: 0.25）
+            const personPinkSpeed = 0.25;
+            const personPinkX = (scrolled * personPinkSpeed);
+
+            const personPink = document.querySelector('.hero-person-pink-image');
+            if (personPink) {
+                personPink.style.transform = `translateX(${personPinkX}px)`;
+            }
+
+            // 青と緑の人物: 左から右（速度: 0.125 = ピンクの半分）
+            const personSlowSpeed = 0.125;
+            const personSlowX = (scrolled * personSlowSpeed);
+
+            const personBlue = document.querySelector('.hero-person-blue-image');
+            if (personBlue) {
+                personBlue.style.transform = `translateX(${personSlowX}px) translateY(50%)`;
+            }
+
+            const personGreen = document.querySelector('.hero-person-green-image');
+            if (personGreen) {
+                personGreen.style.transform = `translateX(${personSlowX}px) translateY(20%)`;
+            }
+
+            // デバイス画像のパララックス効果: 下から上に移動
+            // 重要: CSSの初期値と合わせる必要がある
+            // PC版CSS: translateY(-25%)
+            // モバイル版CSS: translateY(-12.5%)
+            const deviceSpeed = 0.3;
+            const deviceY = -(scrolled * deviceSpeed);
+
+            const deviceImage = document.querySelector('.hero-device-image');
+            if (deviceImage) {
+                // モバイル判定してCSSの初期値と一致させる
+                const isDesktop = window.innerWidth > 768;
+                const baseOffset = isDesktop ? '-25%' : '-12.5%';
+                deviceImage.style.transform = `translateY(calc(${baseOffset} + ${deviceY}px))`;
+            }
+
+            // デバイス周りのアイコンのパララックス効果: 下から上に移動（デバイスの1/4の速さ）
+            const iconSpeed = 0.075; // 0.3 ÷ 4 = 0.075
+            const iconY = -(scrolled * iconSpeed);
+
+            const icon1 = document.querySelector('.hero-device-icon-1');
+            const icon2 = document.querySelector('.hero-device-icon-2');
+            const icon3 = document.querySelector('.hero-device-icon-3');
+
+            if (icon1) {
+                icon1.style.transform = `translateY(${iconY}px)`;
+            }
+            if (icon2) {
+                icon2.style.transform = `translateY(${iconY}px)`;
+            }
+            if (icon3) {
+                icon3.style.transform = `translateY(${iconY}px)`;
+            }
         }
     }
 }
@@ -407,48 +494,165 @@ class MobileMenuController {
         const navContainer = document.querySelector('.nav-container');
         const mobileButton = document.createElement('button');
         mobileButton.className = 'mobile-menu-button';
-        mobileButton.innerHTML = '☰';
+        mobileButton.innerHTML = `
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                <line x1="6" y1="13" x2="30" y2="13" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                <line x1="6" y1="23" x2="30" y2="23" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+        `;
         mobileButton.style.cssText = `
             display: none;
             background: none;
             border: none;
-            font-size: 1.5rem;
             color: var(--text-primary);
             cursor: pointer;
             padding: 0.5rem;
+            line-height: 0;
         `;
-        
+
         navContainer.appendChild(mobileButton);
-        
+
         mobileButton.addEventListener('click', this.toggleMobileMenu.bind(this));
     }
 
     handleResize() {
         const mobileButton = document.querySelector('.mobile-menu-button');
         const navMenu = document.querySelector('.nav-menu');
-        
+
         if (window.innerWidth <= 768) {
             mobileButton.style.display = 'block';
-            navMenu.style.display = 'none';
+            // モバイル時はメニューを閉じる
+            this.closeMobileMenu();
         } else {
             mobileButton.style.display = 'none';
+            // デスクトップ時は元に戻す
+            navMenu.style.cssText = '';
             navMenu.style.display = 'flex';
         }
     }
 
     toggleMobileMenu() {
         const navMenu = document.querySelector('.nav-menu');
-        const isVisible = navMenu.style.display === 'flex';
-        
-        navMenu.style.display = isVisible ? 'none' : 'flex';
+        const isOpen = navMenu.classList.contains('mobile-menu-open');
+
+        if (isOpen) {
+            this.closeMobileMenu();
+        } else {
+            this.openMobileMenu();
+        }
+    }
+
+    openMobileMenu() {
+        const navMenu = document.querySelector('.nav-menu');
+        navMenu.classList.add('mobile-menu-open');
+
+        // メニューコンテナのスタイル
+        navMenu.style.display = 'flex';
         navMenu.style.flexDirection = 'column';
-        navMenu.style.position = 'absolute';
-        navMenu.style.top = '100%';
+        navMenu.style.position = 'fixed';
+        navMenu.style.top = '0';
         navMenu.style.left = '0';
         navMenu.style.right = '0';
-        navMenu.style.background = 'white';
-        navMenu.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
-        navMenu.style.padding = '1rem';
+        navMenu.style.bottom = '0';
+        navMenu.style.width = '100vw';
+        navMenu.style.height = '100vh';
+        navMenu.style.background = 'rgba(0, 0, 0, 0.95)';
+        navMenu.style.zIndex = '9999';
+        navMenu.style.justifyContent = 'center';
+        navMenu.style.alignItems = 'flex-start';
+        navMenu.style.gap = '2rem';
+        navMenu.style.padding = '6rem 3rem 3rem 3rem';
+        navMenu.style.opacity = '0';
+        navMenu.style.transition = 'opacity 0.3s ease';
+
+        // 閉じるボタンを作成
+        const closeButton = document.createElement('button');
+        closeButton.className = 'mobile-menu-close';
+        closeButton.innerHTML = `
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <line x1="8" y1="8" x2="24" y2="24" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <line x1="24" y1="8" x2="8" y2="24" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        `;
+        closeButton.style.cssText = `
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 10000;
+        `;
+        closeButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.closeMobileMenu();
+        });
+        navMenu.appendChild(closeButton);
+
+        // 背景クリックで閉じる
+        navMenu.addEventListener('click', (e) => {
+            if (e.target === navMenu) {
+                this.closeMobileMenu();
+            }
+        });
+
+        // リンクのスタイル
+        const links = navMenu.querySelectorAll('.nav-link');
+        links.forEach(link => {
+            link.style.color = 'white';
+            link.style.fontSize = '1.125rem';
+            link.style.fontWeight = '600';
+            link.style.textAlign = 'left';
+            link.style.width = '100%';
+            link.style.padding = '0.5rem 0';
+            link.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
+
+            // CTAボタンのスタイル調整
+            if (link.classList.contains('cta-button')) {
+                link.style.background = 'white';
+                link.style.color = '#1a1a1a';
+                link.style.borderRadius = '2rem';
+                link.style.padding = '0.75rem 2rem';
+                link.style.border = 'none';
+                link.style.marginTop = '1rem';
+                link.style.width = 'auto';
+            }
+
+            // クリックしたら閉じる
+            link.addEventListener('click', () => {
+                this.closeMobileMenu();
+            });
+        });
+
+        // フェードイン
+        requestAnimationFrame(() => {
+            navMenu.style.opacity = '1';
+        });
+    }
+
+    closeMobileMenu() {
+        const navMenu = document.querySelector('.nav-menu');
+
+        // フェードアウト
+        navMenu.style.opacity = '0';
+
+        setTimeout(() => {
+            navMenu.classList.remove('mobile-menu-open');
+            navMenu.style.display = 'none';
+
+            // 閉じるボタンを削除
+            const closeButton = navMenu.querySelector('.mobile-menu-close');
+            if (closeButton) {
+                closeButton.remove();
+            }
+
+            // リンクのスタイルをリセット
+            const links = navMenu.querySelectorAll('.nav-link');
+            links.forEach(link => {
+                link.style.cssText = '';
+            });
+        }, 300);
     }
 }
 
@@ -497,12 +701,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 opacity: 0;
             }
         }
-        
-        .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-        }
-        
+
+        /* .navbar.scrolledのスタイルはstyles.cssで定義（すりガラス効果） */
+
         .notification {
             font-weight: 500;
             font-size: 0.875rem;
