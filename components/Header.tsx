@@ -80,7 +80,7 @@ export default function Header() {
 
         {/* Desktop Menu */}
         <div className="nav-menu">
-          <Link href="/#features" className="nav-link">機能</Link>
+          <Link href="/#features" className="nav-link">製品概要</Link>
           <Link href="/company/" className="nav-link">会社概要</Link>
         </div>
 
@@ -140,8 +140,11 @@ export default function Header() {
             </svg>
           </button>
           <div className="mobile-menu-content">
+            <Link href="/" className="mobile-nav-link" onClick={closeMobileMenu}>
+              TOP
+            </Link>
             <Link href="/#features" className="mobile-nav-link" onClick={closeMobileMenu}>
-              機能
+              製品概要
             </Link>
             <Link href="/company/" className="mobile-nav-link" onClick={closeMobileMenu}>
               会社概要

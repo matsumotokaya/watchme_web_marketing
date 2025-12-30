@@ -22,15 +22,6 @@ export default function CompanyPage() {
             </p>
           </div>
 
-          <div className="vision-image-section">
-            <Image
-              src="/images/purpose_people_003.png"
-              alt="ニューロダイバーシティの実現"
-              className="vision-image"
-              width={1200}
-              height={600}
-            />
-          </div>
         </div>
       </section>
     </main>

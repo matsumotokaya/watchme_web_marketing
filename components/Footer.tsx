@@ -21,7 +21,7 @@ export default function Footer() {
           <div className="footer-links">
             <div className="link-group">
               <h4>製品</h4>
-              <Link href="/#features">機能</Link>
+              <Link href="/#features">製品概要</Link>
             </div>
             <div className="link-group">
               <h4>企業</h4>

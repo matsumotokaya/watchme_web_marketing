@@ -98,7 +98,7 @@ body > main {
 }
 
 .auth-section {
-    padding: var(--spacing-20) 0;
+    padding: 0 0 var(--spacing-20);
     min-height: calc(100vh - 80px);
     display: flex;
     align-items: center;
@@ -561,6 +561,34 @@ body > main {
     color: white;
 }
 
+/* Early Access Button */
+.btn-early-access {
+    margin-top: var(--spacing-8);
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    padding: var(--spacing-4) var(--spacing-8);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+}
+
+.btn-early-access .material-icons {
+    font-size: 1.5rem;
+}
+
+.btn-early-access:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    opacity: 0.9;
+}
+
 /* Responsive Design for Auth Pages */
 @media (max-width: 768px) {
     .auth-content {
@@ -686,6 +714,7 @@ body > main {
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    margin-bottom: var(--spacing-20);
 }
 
 /* Background Color Layers */
@@ -1058,7 +1087,7 @@ body > main {
 
 /* Product Introduction Section */
 .product-intro {
-    padding: var(--spacing-24) 0;
+    padding: 0 0 var(--spacing-24);
     background: white;
 }
 
@@ -1122,7 +1151,7 @@ body > main {
 
 /* Features Section */
 .features {
-    padding: var(--spacing-24) 0;
+    padding: 0 0 var(--spacing-24);
     background: var(--background);
 }
 
@@ -1207,7 +1236,7 @@ body > main {
 
 /* Technology Section */
 .technology {
-    padding: var(--spacing-24) 0;
+    padding: 0 0 var(--spacing-24);
     background: var(--background-secondary);
 }
 
@@ -1336,7 +1365,7 @@ body > main {
 
 /* Use Cases */
 .use-cases {
-    padding: var(--spacing-24) 0;
+    padding: 0 0 var(--spacing-24);
     background: var(--background);
 }
 
@@ -1387,7 +1416,7 @@ body > main {
 
 /* Pricing Section */
 .pricing {
-    padding: var(--spacing-24) 0;
+    padding: 0 0 var(--spacing-24);
     background: var(--background-secondary);
 }
 
@@ -1501,7 +1530,7 @@ body > main {
 
 /* CTA Section */
 .cta {
-    padding: var(--spacing-24) 0;
+    padding: 0 0 var(--spacing-24);
     background: var(--background-dark);
     color: white;
     text-align: center;
@@ -1533,7 +1562,7 @@ body > main {
 .footer {
     background: var(--background-dark);
     color: white;
-    padding: var(--spacing-16) 0 var(--spacing-8);
+    padding: var(--spacing-12) 0 var(--spacing-8);
 }
 
 .footer-content {
@@ -1615,7 +1644,7 @@ body > main {
 
 /* Purpose Page Specific Styles */
 .purpose-content {
-    padding: var(--spacing-24) 0;
+    padding: 0 0 var(--spacing-24);
     background: var(--background);
 }
 
@@ -1656,7 +1685,7 @@ body > main {
 }
 
 .company-overview {
-    padding: var(--spacing-24) 0;
+    padding: 0 0 var(--spacing-24);
     background: var(--background);
 }
 
@@ -1748,7 +1777,7 @@ body > main {
 }
 
 .company-info {
-    padding: var(--spacing-24) 0;
+    padding: 0 0 var(--spacing-24);
     background: var(--background-secondary);
 }
 
@@ -1824,7 +1853,7 @@ body > main {
 }
 
 .company-history {
-    padding: var(--spacing-24) 0;
+    padding: 0 0 var(--spacing-24);
     background: var(--background);
 }
 
@@ -1882,7 +1911,7 @@ body > main {
 }
 
 .leadership-team {
-    padding: var(--spacing-24) 0;
+    padding: 0 0 var(--spacing-24);
     background: var(--background-secondary);
 }
 
@@ -1953,7 +1982,7 @@ body > main {
 }
 
 .awards-recognition {
-    padding: var(--spacing-24) 0;
+    padding: 0 0 var(--spacing-24);
     background: var(--background);
 }
 
@@ -2058,6 +2087,10 @@ body > main {
         height: 120px;
     }
 
+    .hero {
+        margin-bottom: 50px;
+    }
+
     .hero-container {
         grid-template-columns: 1fr;
         gap: var(--spacing-12);
@@ -2075,20 +2108,19 @@ body > main {
 
     /* Product Introduction: モバイル対応 */
     .product-intro {
-        padding: var(--spacing-12) 0;
+        padding: 0 0 var(--spacing-12);
     }
 
     .product-intro-content {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-8);
         display: flex;
         flex-direction: column;
+        gap: var(--spacing-8);
     }
 
     .product-intro-text {
-        order: 1;
         display: flex;
         flex-direction: column;
+        order: 1;
     }
 
     .product-intro-title {
@@ -2099,15 +2131,16 @@ body > main {
     .product-intro-description {
         font-size: 16px;
         order: 2;
-    }
-
-    .btn-early-access {
-        order: 4;
-        margin-top: var(--spacing-6);
+        margin-bottom: 0;
     }
 
     .product-intro-image {
+        order: 2;
+    }
+
+    .product-intro-text .btn-early-access {
         order: 3;
+        margin-top: 0;
     }
 
     .tech-content {
@@ -2116,7 +2149,7 @@ body > main {
     }
     
     .features {
-        padding: var(--spacing-12) 0;
+        padding: 0 0 var(--spacing-12);
     }
 
     .features-grid {
@@ -2124,7 +2157,7 @@ body > main {
     }
 
     .use-cases {
-        padding: var(--spacing-12) 0;
+        padding: 0 0 var(--spacing-12);
     }
 
     .footer-logo-image {
@@ -2202,17 +2235,22 @@ body > main {
 
 @media (max-width: 480px) {
     .container, .nav-container, .hero-container {
-        padding: 0 var(--spacing-4);
+        padding: 0 var(--spacing-6);
     }
     
     .hero-title {
         font-size: var(--font-size-3xl);
     }
     
+    .section-header {
+        margin-bottom: var(--spacing-12);
+    }
+
     .section-title {
         font-size: var(--font-size-3xl);
+        margin-bottom: 0;
     }
-    
+
     .floating-card {
         position: static;
         margin: var(--spacing-4) 0;
@@ -2312,34 +2350,6 @@ body > main {
 
 .mobile-nav-link:hover {
     color: #3b82f6;
-}
-
-/* Early Access Button */
-.btn-early-access {
-    margin-top: var(--spacing-8);
-    background: #1a1a1a;
-    color: white;
-    border: none;
-    padding: var(--spacing-4) var(--spacing-8);
-    border-radius: var(--radius-full);
-    font-size: var(--font-size-lg);
-    font-weight: 700;
-    cursor: pointer;
-    transition: all var(--transition-base);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-2);
-}
-
-.btn-early-access .material-icons {
-    font-size: 1.5rem;
-}
-
-.btn-early-access:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-    opacity: 0.9;
 }
 
 /* Contact Modal */
@@ -2458,27 +2468,33 @@ body > main {
     background: #efefef;
     min-height: 100vh;
     padding-top: 120px;
+    background-image: url('/images/purpose_people_003.png');
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .vision-section {
-    padding: var(--spacing-24) 0;
+    padding: 0 0 var(--spacing-24);
 }
 
 .vision-container {
     max-width: 900px;
     margin: 0 auto;
-    padding: 0 var(--spacing-6);
+    padding: var(--spacing-20) var(--spacing-6);
     display: flex;
     flex-direction: column;
     gap: var(--spacing-12);
 }
 
 .vision-title {
-    font-size: 48px;
+    font-size: 50px;
     font-weight: 700;
-    color: #1a1a1a;
-    text-align: center;
+    color: #fff;
     line-height: 1.3;
+    background: #000;
+    display: inline-block;
+    padding: var(--spacing-3) var(--spacing-6);
 }
 
 .vision-text {
@@ -2510,14 +2526,15 @@ body > main {
 @media (max-width: 768px) {
     .vision-page {
         padding-top: 100px;
+        background-size: 180%;
     }
 
     .vision-section {
-        padding: var(--spacing-12) 0;
+        padding: 0 0 var(--spacing-12);
     }
 
     .vision-title {
-        font-size: 32px;
+        font-size: 40px;
     }
 
     .vision-text p {
@@ -2534,7 +2551,7 @@ body > main {
 .policy-container {
     max-width: 900px;
     margin: 0 auto;
-    padding: 60px 20px;
+    padding: 0 20px var(--spacing-16);
 }
 
 .policy-header {
@@ -2616,7 +2633,7 @@ body > main {
     }
 
     .policy-container {
-        padding: 40px 20px;
+        padding: 0 20px var(--spacing-10);
     }
 
     .policy-header h1 {
