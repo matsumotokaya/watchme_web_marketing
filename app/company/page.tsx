@@ -7,25 +7,26 @@ export const metadata = {
 
 export default function CompanyPage() {
   return (
-    <main>
-      {/* Page Header */}
-      <section className="page-header">
-        <div className="container">
-          <div className="header-content">
-            <h1 className="page-title">Company</h1>
-            <p className="page-subtitle">WatchMeは神経学的に多様な社会を実現します</p>
-          </div>
-        </div>
-      </section>
+    <main className="vision-page">
+      {/* Vision Section */}
+      <section className="vision-section">
+        <div className="vision-container">
+          <h1 className="vision-title">ニューロダイバーシティの実現</h1>
 
-      {/* Purpose Content Section */}
-      <section className="purpose-content">
-        <div className="container">
-          <div className="purpose-image-section">
+          <div className="vision-text">
+            <p>
+              すべての人は、異なる脳と身体を持っています。しかし、社会はまだそれを受け入れられるほど成熟していません。私たちは人を定型／非定型で分類することで「発達障害」を生み出しています。
+            </p>
+            <p>
+              もし、こころを可視化するテクノロジーがあるなら「自分たち」と「彼ら」を分かつ境界線など存在しないことが分かるはずです。本当の意味で、すべての人が、神経学的多様性を受容できたなら「発達障害」という言葉は不要です。そもそも「まともな人間」など最初から存在しないのです。
+            </p>
+          </div>
+
+          <div className="vision-image-section">
             <Image
               src="/images/purpose_people_003.png"
               alt="ニューロダイバーシティの実現"
-              className="purpose-image"
+              className="vision-image"
               width={1200}
               height={600}
             />
