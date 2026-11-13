@@ -11,16 +11,31 @@ export default function Home() {
     email: '',
     gender: '',
     age: '',
-    comment: ''
+    comment: '',
+    website: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: フォーム送信処理
-    console.log('Form submitted:', formData);
-    alert('お問い合わせありがとうございます。後ほど担当者からご連絡いたします。');
-    setIsModalOpen(false);
-    setFormData({ name: '', email: '', gender: '', age: '', comment: '' });
+    setIsSubmitting(true);
+    setSubmitError('');
+    try {
+      const response = await fetch('/api/early-access', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) throw new Error(`status ${response.status}`);
+      alert('お申し込みありがとうございます。ご案内の準備ができしだい、メールでご連絡します。');
+      setIsModalOpen(false);
+      setFormData({ name: '', email: '', gender: '', age: '', comment: '', website: '' });
+    } catch {
+      setSubmitError('送信できませんでした。時間をおいてもう一度お試しいただくか、support@hey-watch.me までメールでご連絡ください。');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -324,8 +339,29 @@ export default function Home() {
                 ></textarea>
               </div>
 
-              <button type="submit" className="btn-submit">
-                送信
+              <div className="form-honeypot" aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input
+                  type="text"
+                  id="website"
+                  name="website"
+                  value={formData.website}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
+              <p className="form-note">
+                ご入力いただいた情報は、アーリーアクセスのご案内のためだけに使います。取り扱いは<a href="/privacy/" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>をご覧ください。
+              </p>
+
+              {submitError && (
+                <p className="form-error" role="alert">{submitError}</p>
+              )}
+
+              <button type="submit" className="btn-submit" disabled={isSubmitting}>
+                {isSubmitting ? '送信中…' : '送信'}
               </button>
             </form>
           </div>

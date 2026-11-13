@@ -2,44 +2,49 @@ export const metadata = {
   title: 'プライバシーポリシー - WatchMe',
 };
 
+// Keep in sync with the in-app policy (ios-watchme PrivacyPolicyView.swift).
 export default function PrivacyPage() {
   return (
     <main className="policy-page">
       <div className="policy-container">
         <div className="policy-header">
           <h1>プライバシーポリシー</h1>
-          <p className="policy-date">最終更新日: 2025年10月18日</p>
+          <p className="policy-date">最終更新日: 2026年11月15日</p>
         </div>
 
         <p className="policy-intro">
-          WatchMe Team（以下「当社」といいます）は、本アプリケーションにおけるユーザーの個人情報の取扱いについて、以下のとおりプライバシーポリシー（以下「本ポリシー」といいます）を定めます。
+          WatchMe Team（以下「当社」といいます）は、本アプリケーション（以下「本アプリ」といいます）および本ウェブサイト（https://hey-watch.me）におけるユーザーの個人情報の取扱いについて、以下のとおりプライバシーポリシー（以下「本ポリシー」といいます）を定めます。
         </p>
 
         <div className="policy-section">
           <h2>1. 収集する個人情報</h2>
-          <p>当社は、本アプリの提供にあたり、以下の個人情報を収集します。</p>
+          <p>当社は、本アプリおよび本ウェブサイトの提供にあたり、以下の個人情報を収集します。</p>
 
           <p><strong>【アカウント情報】</strong></p>
           <ul>
-            <li>メールアドレス</li>
-            <li>パスワード（暗号化して保存）</li>
-            <li>ユーザー名（任意）</li>
-            <li>プロフィール画像（任意）</li>
+            <li>メールアドレス（Google アカウントでログインした場合は、Google から受け取るもの）</li>
+            <li>パスワード（メールアドレスで登録した場合。暗号化して保存）</li>
+            <li>ユーザー名・プロフィール画像（任意）</li>
           </ul>
 
-          <p><strong>【利用データ】</strong></p>
+          <p><strong>【観測対象（お子さまなど）の情報】</strong></p>
           <ul>
-            <li>音声録音データ（手動録音、および外部デバイスからのアップロード）</li>
-            <li>録音日時とタイムゾーン情報</li>
-            <li>デバイス識別情報</li>
-            <li>アプリの利用履歴</li>
+            <li>名前、年齢、性別、メモなど、利用者が登録した情報（任意）</li>
           </ul>
 
-          <p><strong>【分析データ】</strong></p>
+          <p><strong>【録音と分析のデータ】</strong></p>
           <ul>
-            <li>AI による感情分析結果</li>
-            <li>行動パターン分析結果</li>
-            <li>統計データ</li>
+            <li>iPhone で録音した音声、および利用者が取り込んだ動画・音声ファイルの音声</li>
+            <li>録音日時とタイムゾーン</li>
+            <li>音声から作る文字起こし、会話の指標（話した量・速さ・間など）、声の特徴、周囲の音、出来事（叱る・褒める・笑う などの回数）、分析の文章</li>
+            <li>デバイスの識別情報、プッシュ通知のための識別子</li>
+          </ul>
+          <p>録音には、利用者本人のほか、ご家族やお子さまなど、その場にいる方の声が含まれます。</p>
+
+          <p><strong>【本ウェブサイトでのアーリーアクセスのお申し込み】</strong></p>
+          <ul>
+            <li>お名前、メールアドレス</li>
+            <li>性別、年齢、コメント（任意）</li>
           </ul>
         </div>
 
@@ -47,14 +52,14 @@ export default function PrivacyPage() {
           <h2>2. 個人情報の利用目的</h2>
           <p>収集した個人情報は、以下の目的で利用します。</p>
           <ul>
-            <li>本アプリのサービス提供</li>
-            <li>ユーザーの感情・行動分析とフィードバック</li>
+            <li>録音の分析と、その結果の表示（日ごとの変化、出来事の回数など）</li>
+            <li>分析が終わったことなどのお知らせ</li>
             <li>ユーザーサポートの提供</li>
-            <li>サービスの改善と新機能の開発</li>
-            <li>統計データの作成（個人を特定できない形式）</li>
-            <li>重要なお知らせや更新情報の通知</li>
+            <li>本アプリの改善（研究への協力に同意した方の音声については、「研究への協力」の項目のとおり）</li>
             <li>利用規約違反への対応</li>
+            <li>アーリーアクセスのお申し込みへのご連絡とご案内</li>
           </ul>
+          <p>本アプリの分析は、医療的な診断を行うものではありません。</p>
         </div>
 
         <div className="policy-section">
@@ -63,17 +68,21 @@ export default function PrivacyPage() {
 
           <p><strong>【セキュリティ対策】</strong></p>
           <ul>
-            <li>SSL/TLS による通信の暗号化</li>
-            <li>データベースの暗号化</li>
-            <li>アクセス権限の厳格な管理</li>
-            <li>定期的なセキュリティ監査</li>
+            <li>通信の暗号化（TLS）と、保存するデータの暗号化</li>
+            <li>利用者は、自分が連携しているデバイスのデータだけを閲覧できます</li>
+          </ul>
+
+          <p><strong>【保存場所】</strong></p>
+          <ul>
+            <li>データは日本国内（東京）のサーバーに保存します。分析の一部は、下記の外部サービスで処理します</li>
           </ul>
 
           <p><strong>【保存期間】</strong></p>
           <ul>
-            <li>アカウント削除後、30日以内にすべての個人情報を削除</li>
-            <li>音声データは録音から90日間保存（設定により変更可能）</li>
-            <li>分析結果は無期限で保存（個人識別情報は除外）</li>
+            <li>音声: 分析が終わってから3日で削除します（研究への協力に同意した場合を除く）</li>
+            <li>文字起こし・分析結果・観測対象の情報: アカウントがある間保存し、アカウントの削除とともに削除します</li>
+            <li>アカウントを削除すると、そのアカウントだけが使っているデバイスの録音と分析結果、観測対象の情報、プロフィール画像も削除します。他のアカウントも連携しているデバイスのデータは、連携だけを解除して残します</li>
+            <li>アーリーアクセスのお申し込みの情報: ご案内が終わるまで保存します。削除をご希望の場合は、下記の窓口までご連絡ください</li>
           </ul>
         </div>
 
@@ -91,25 +100,44 @@ export default function PrivacyPage() {
 
         <div className="policy-section">
           <h2>5. 外部サービスの利用</h2>
-          <p>本アプリは、以下の外部サービスを利用しています。</p>
+          <p>本アプリは、録音の分析と保存のために、以下の外部サービスを利用しています。各サービスに送ったデータは、本アプリの処理のためだけに使われ、各社の AI モデルの学習には使われない契約・設定で利用しています。</p>
 
-          <p><strong>【Supabase】</strong></p>
+          <p><strong>【Google（Gemini API）】</strong></p>
           <ul>
-            <li>認証とデータベース管理</li>
+            <li>文字起こし、録音の場面の説明</li>
+            <li>プライバシーポリシー: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a></li>
+          </ul>
+
+          <p><strong>【OpenAI（API）】</strong></p>
+          <ul>
+            <li>分析の文章、出来事の抽出（文字起こしと測定値を送ります。音声は送りません）</li>
+            <li>プライバシーポリシー: <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener noreferrer">https://openai.com/policies/privacy-policy</a></li>
+          </ul>
+
+          <p><strong>【Amazon Web Services（東京リージョン）】</strong></p>
+          <ul>
+            <li>音声の保存と分析の処理</li>
+            <li>プライバシーポリシー: <a href="https://aws.amazon.com/privacy" target="_blank" rel="noopener noreferrer">https://aws.amazon.com/privacy</a></li>
+          </ul>
+
+          <p><strong>【Supabase（東京リージョン）】</strong></p>
+          <ul>
+            <li>ログインとデータベース、アーリーアクセスのお申し込みの保存</li>
             <li>プライバシーポリシー: <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">https://supabase.com/privacy</a></li>
           </ul>
 
-          <p><strong>【OpenAI API】</strong></p>
+          <p>本ウェブサイトは、以下の外部サービスを利用しています。</p>
+
+          <p><strong>【Vercel】</strong></p>
           <ul>
-            <li>感情分析と自然言語処理</li>
-            <li>データは分析のみに使用され、OpenAI のモデル訓練には使用されません</li>
-            <li>プライバシーポリシー: <a href="https://openai.com/privacy" target="_blank" rel="noopener noreferrer">https://openai.com/privacy</a></li>
+            <li>本ウェブサイトの配信</li>
+            <li>プライバシーポリシー: <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">https://vercel.com/legal/privacy-policy</a></li>
           </ul>
 
-          <p><strong>【Amazon S3】</strong></p>
+          <p><strong>【Resend】</strong></p>
           <ul>
-            <li>音声ファイルとアバター画像の保存</li>
-            <li>プライバシーポリシー: <a href="https://aws.amazon.com/privacy" target="_blank" rel="noopener noreferrer">https://aws.amazon.com/privacy</a></li>
+            <li>アーリーアクセスのお申し込みを当社の窓口へ知らせるメールの送信</li>
+            <li>プライバシーポリシー: <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">https://resend.com/legal/privacy-policy</a></li>
           </ul>
         </div>
 
@@ -126,12 +154,23 @@ export default function PrivacyPage() {
 
         <div className="policy-section">
           <h2>7. 子どものプライバシー</h2>
-          <p>本アプリは、13歳未満の子どもを対象としていません。13歳未満の子どもの個人情報を意図的に収集することはありません。</p>
-          <p>13歳未満の子どもが個人情報を提供したことが判明した場合、速やかに削除します。</p>
+          <p>本アプリは、保護者が利用者となり、お子さまを観測対象として登録して使うことを想定しています。13歳未満の方が自分でアカウントを作ることは想定していません。</p>
+          <p>お子さまの声や情報は、保護者である利用者の判断と同意のもとで録音・登録してください。お子さまの情報の削除は、観測対象の削除、デバイスの削除、またはアカウントの削除で行えます。</p>
         </div>
 
         <div className="policy-section">
-          <h2>8. ユーザーの権利</h2>
+          <h2>8. 研究への協力（任意）</h2>
+          <p>会員登録のとき、または初めてログインしたときに、研究への協力を選べます。協力するかどうかは任意で、マイページでいつでも変更できます。</p>
+          <ul>
+            <li>協力した場合: 録音した音声を研究用の保管場所に残し、本アプリの分析の改善（精度の確認や、分析に使うモデルの評価・学習）のためだけに使います。外部に提供したり、公開したりしません</li>
+            <li>協力しない場合: 音声は分析が終わってから3日で削除します</li>
+            <li>取りやめた場合: それまでに保管した音声を削除します（同じデバイスに連携している別のアカウントが協力している場合、そのデバイスの音声は残ります）</li>
+            <li>いつ、どの内容に同意したかを記録します</li>
+          </ul>
+        </div>
+
+        <div className="policy-section">
+          <h2>9. ユーザーの権利</h2>
           <p>ユーザーは、自己の個人情報について以下の権利を有します。</p>
           <ul>
             <li>開示請求: 保有する個人情報の開示を請求する権利</li>
@@ -144,18 +183,18 @@ export default function PrivacyPage() {
         </div>
 
         <div className="policy-section">
-          <h2>9. プライバシーポリシーの変更</h2>
+          <h2>10. プライバシーポリシーの変更</h2>
           <p>当社は、必要に応じて本ポリシーを変更することがあります。</p>
-          <p>重要な変更がある場合は、アプリ内通知またはメールでお知らせします。変更後の本ポリシーは、アプリ内に掲示した時点から効力を生じるものとします。</p>
+          <p>重要な変更がある場合は、アプリ内通知またはメールでお知らせします。変更後の本ポリシーは、アプリ内または本ウェブサイトに掲示した時点から効力を生じるものとします。</p>
         </div>
 
         <div className="policy-section">
-          <h2>10. お問い合わせ</h2>
+          <h2>11. お問い合わせ</h2>
           <p>本ポリシーに関するお問い合わせは、以下の窓口までお願いします。</p>
           <p>
             WatchMe Team<br />
-            メール: support@hey-watch.me<br />
-            お問い合わせフォーム: アプリ内設定画面より
+            メール: <a href="mailto:support@hey-watch.me">support@hey-watch.me</a><br />
+            アプリからは、設定画面の「お問い合わせ」からもご連絡いただけます。
           </p>
         </div>
 

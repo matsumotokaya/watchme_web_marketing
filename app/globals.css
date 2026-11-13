@@ -2447,6 +2447,37 @@ body > main {
     opacity: 0.9;
 }
 
+.btn-submit:disabled {
+    opacity: 0.5;
+    cursor: wait;
+    transform: none;
+    box-shadow: none;
+}
+
+.form-honeypot {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.form-note {
+    font-size: var(--font-size-sm);
+    color: #666;
+    line-height: 1.6;
+}
+
+.form-note a {
+    text-decoration: underline;
+}
+
+.form-error {
+    font-size: var(--font-size-sm);
+    color: #c0392b;
+    line-height: 1.6;
+}
+
 @media (max-width: 768px) {
     .contact-modal-content {
         padding: var(--spacing-6);
