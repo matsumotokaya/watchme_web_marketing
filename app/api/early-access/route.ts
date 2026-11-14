@@ -1,13 +1,11 @@
 import { NextResponse } from 'next/server';
+import { EMAIL_PATTERN, notifySupport, text } from '@/lib/mail';
 
 // Early access requests from the top page form.
 // Saved to Supabase (public.early_access_requests, insert-only for anon), then
 // announced by email through Resend. The request is saved even if the email fails.
 
-const NOTIFY_TO = 'support@hey-watch.me';
-const NOTIFY_FROM = 'WatchMe <noreply@hey-watch.me>';
 const GENDERS = ['male', 'female', 'other'];
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type EarlyAccessRequest = {
   name: string;
@@ -16,13 +14,6 @@ type EarlyAccessRequest = {
   age: number | null;
   comment: string | null;
 };
-
-function text(value: unknown, max: number): string | null {
-  if (typeof value !== 'string') return null;
-  const trimmed = value.trim();
-  if (!trimmed) return null;
-  return trimmed.slice(0, max);
-}
 
 function parse(body: Record<string, unknown>): EarlyAccessRequest | null {
   const name = text(body.name, 100);
@@ -65,9 +56,6 @@ async function save(request: EarlyAccessRequest): Promise<void> {
 const GENDER_LABELS: Record<string, string> = { male: '男性', female: '女性', other: 'その他' };
 
 async function notify(request: EarlyAccessRequest): Promise<void> {
-  const key = process.env.RESEND_API_KEY;
-  if (!key) throw new Error('RESEND_API_KEY is not set');
-
   const lines = [
     'hey-watch.me からアーリーアクセスの申し込みがありました。',
     '',
@@ -80,20 +68,7 @@ async function notify(request: EarlyAccessRequest): Promise<void> {
     request.comment ?? '-',
   ];
 
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      from: NOTIFY_FROM,
-      to: [NOTIFY_TO],
-      reply_to: request.email,
-      subject: `【WatchMe】アーリーアクセス申し込み: ${request.name}`,
-      text: lines.join('\n'),
-    }),
-  });
-  if (!response.ok) {
-    throw new Error(`Resend failed: ${response.status} ${await response.text()}`);
-  }
+  await notifySupport(`【WatchMe】アーリーアクセス申し込み: ${request.name}`, lines.join('\n'), request.email);
 }
 
 export async function POST(req: Request) {
