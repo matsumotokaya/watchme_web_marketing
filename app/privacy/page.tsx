@@ -9,7 +9,7 @@ export default function PrivacyPage() {
       <div className="policy-container">
         <div className="policy-header">
           <h1>プライバシーポリシー</h1>
-          <p className="policy-date">最終更新日: 2026年11月15日</p>
+          <p className="policy-date">最終更新日: 2026年11月18日</p>
         </div>
 
         <p className="policy-intro">
@@ -74,7 +74,7 @@ export default function PrivacyPage() {
 
           <p><strong>【保存場所】</strong></p>
           <ul>
-            <li>データは日本国内（東京）のサーバーに保存します。分析の一部は、下記の外部サービスで処理します</li>
+            <li>データは日本国内（東京）のサーバーに保存します。分析の一部は、下記の外部サービスで処理します（文字起こしに使う ElevenLabs では、音声と文字起こしが米国のサーバーに保存されます）</li>
           </ul>
 
           <p><strong>【保存期間】</strong></p>
@@ -102,15 +102,21 @@ export default function PrivacyPage() {
           <h2>5. 外部サービスの利用</h2>
           <p>本アプリは、録音の分析と保存のために、以下の外部サービスを利用しています。各サービスに送ったデータは、本アプリの処理のためだけに使われ、各社の AI モデルの学習には使われない契約・設定で利用しています。</p>
 
+          <p><strong>【ElevenLabs（Speech to Text API）】</strong></p>
+          <ul>
+            <li>文字起こし（音声を送ります。音声と文字起こしは、同社の米国のサーバーで処理・保存されます）</li>
+            <li>プライバシーポリシー: <a href="https://elevenlabs.io/privacy-policy" target="_blank" rel="noopener noreferrer">https://elevenlabs.io/privacy-policy</a></li>
+          </ul>
+
           <p><strong>【Google（Gemini API）】</strong></p>
           <ul>
-            <li>文字起こし、録音の場面の説明</li>
+            <li>録音を聞いての、場面・話している人・出来事の記録（音声、文字起こし、声の測定値、登録された観測対象の情報を送ります）</li>
             <li>プライバシーポリシー: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a></li>
           </ul>
 
           <p><strong>【OpenAI（API）】</strong></p>
           <ul>
-            <li>分析の文章、出来事の抽出（文字起こしと測定値を送ります。音声は送りません）</li>
+            <li>分析の文章（文字起こし、上の記録、登録された観測対象の情報を送ります。音声は送りません）</li>
             <li>プライバシーポリシー: <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener noreferrer">https://openai.com/policies/privacy-policy</a></li>
           </ul>
 
